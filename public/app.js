@@ -8,7 +8,8 @@ function displayResults(articles) {
   articles.forEach(function(article) {
     // Append each of the animal's properties to the table
     $("#results").append("<h3>" + article.title + "</h3>" +
-                      "<src>" + article.link + "</src>");
+                         // "<p>" + article.summary + "</p>" +
+                         "<a class= 'btn btn-primary btn-lg' role='button' target = '_blank' href= " + article.link + ">" + "Full Article" + "</a>");
   });
 }
 

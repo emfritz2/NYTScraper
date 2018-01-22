@@ -51,13 +51,15 @@ app.get("/scrape", function(req, res) {
     $("h2.story-heading").each(function(i, element) {
       // Save the text and href of each link enclosed in the current element
       var title = $(element).children("a").text();
+      var summary = $(element).children("a").text();
       var link = $(element).children("a").attr("href");
 
       // If this found element had both a title and a link
-      if (title && link) {
+      if (title && summary && link) {
         // Insert the data in the scrapedData db
         db.scrapedData.insert({
           title: title,
+          // summary: summary,
           link: link
         },
         function(err, inserted) {

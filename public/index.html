@@ -4,18 +4,31 @@
     <meta charset="UTF-8">
     <title>NYT Scraper</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- style sheet -->
     <link rel="stylesheet" href="style.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
-    <h1>NYT Scraper</h1>
+    <!-- header -->
+    <div class="jumbotron">
+        <h1 class="display-3">New York Times Scraper</h1>
+        <p class="lead"></p>
+        <hr class="my-4">
+        <p>Find recent articles from the New York Times.</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" id="scrape" href="#" role="button">Scrape</a>
+        </p>
+    </div>
+
     <div id="buttons">
-      <button id="scrape">Scrape</button>
     </div>
     <div id="results">
           <!-- Results from DB here -->
           <h3 id="article-title"></h3>
-          <src id="article-link"></src>
-          <button id="save">Save</button>
+          <!-- <p id="article-summary"></p> -->
+          <a href="article-link"></a>
+          <a class="btn btn-primary btn-lg" id="save" href="#" role="button">Save Article</a>
           <br>
     </div>
     <script src="app.js"></script>
