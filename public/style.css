@@ -1,3 +1,21 @@
+* {
+  border-radius: 0 !important;
+  font-family: 'Raleway', sans-serif;
+}
+
 .jumbotron {
 	text-align: center;
+}
+
+.btn {
+	background-color: #363636;
+	outline: 0px;
+	color: white;
+	margin: 5px;
+
+}
+
+#results {
+	/*background-color: #EEEEEE;*/
+	padding: 10px;
 }

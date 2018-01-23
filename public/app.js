@@ -9,7 +9,10 @@ function displayResults(articles) {
     // Append each of the animal's properties to the table
     $("#results").append("<h3>" + article.title + "</h3>" +
                          // "<p>" + article.summary + "</p>" +
-                         "<a class= 'btn btn-primary btn-lg' role='button' target = '_blank' href= " + article.link + ">" + "Full Article" + "</a>");
+                         "<a class= 'btn btn-md' role='button' target = '_blank' href= " + article.link + ">" + "Full Article" + "</a>"
+                         // + "<button class= 'btn btn-md'" + "Save Article" "</button>"
+                          +"<a class= 'btn btn-md' role='button' target = '_blank' href= " + article.saved + ">" + "Save" + "</a><hr class='my-4'>"
+                         );
   });
 }
 

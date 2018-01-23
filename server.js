@@ -12,7 +12,7 @@ var app = express();
 app.use(express.static("public"));
 
 // Database configuration
-var databaseUrl = "nyt_db";
+var databaseUrl = "nyt-db";
 var collections = ["scrapedData"];
 
 // Hook mongojs configuration to the db variable
@@ -53,6 +53,7 @@ app.get("/scrape", function(req, res) {
       var title = $(element).children("a").text();
       var summary = $(element).children("a").text();
       var link = $(element).children("a").attr("href");
+      var saved = false;
 
       // If this found element had both a title and a link
       if (title && summary && link) {
@@ -60,7 +61,8 @@ app.get("/scrape", function(req, res) {
         db.scrapedData.insert({
           title: title,
           // summary: summary,
-          link: link
+          link: link,
+          saved: saved
         },
         function(err, inserted) {
           if (err) {
