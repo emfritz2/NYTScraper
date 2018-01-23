@@ -60,7 +60,7 @@ app.get("/scrape", function(req, res) {
         // Insert the data in the scrapedData db
         db.scrapedData.insert({
           title: title,
-          // summary: summary,
+          summary: summary,
           link: link,
           saved: saved
         },
