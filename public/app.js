@@ -13,7 +13,8 @@ function displayResults(articles) {
                          // "<p>" + article.summary + "</p>" +
                          "<a class= 'btn btn-md' role='button' target = '_blank' href= " + article.link + ">" + "Full Article" + "</a>"
                          // + "<button class= 'btn btn-md'" + "Save Article" "</button>"
-                          + "<a class= 'btn btn-md' id='save'" + article.saved + ">" + "Save" + "</a><hr class='my-4'>"
+                          + "<a class= 'btn btn-md' id='save'>" + "Save" + "</a>"
+                          + "<a class= 'btn btn-md' id='comment'>" + "Comment" + "</a><hr class='my-4'>"
                          );
   });
 }

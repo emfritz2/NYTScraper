@@ -7,8 +7,26 @@
 	text-align: center;
 }
 
-.btn {
+.btn-lg {
+	width: 15%;
 	background-color: #363636;
+	outline: 0px;
+	color: white;
+	margin: 5px;
+
+}
+
+.btn-md {
+	width: 10%;
+	background-color: #363636;
+	outline: 0px;
+	color: white;
+	margin: 5px;
+
+}
+
+.btn:hover {
+	background-color: #626065;
 	outline: 0px;
 	color: white;
 	margin: 5px;
