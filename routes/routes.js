@@ -6,19 +6,14 @@ var request = require("request");
 var cheerio = require("cheerio");
 var exphbs  = require('express-handlebars');
 
+var router = express.Router();
+
 // Initialize Express
-var app = express();
+// var router = express();
 
 // handlebars
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
-
-// require the public folder
-app.use(express.static("public"));
-
-// Database configuration
-var databaseUrl = "nyt-db";
-var collections = ["scrapedData", "saved"];
+router.engine('handlebars', exphbs({defaultLayout: 'main'}));
+router.set('view engine', 'handlebars');
 
 // Hook mongojs configuration to the db variable
 var db = mongojs(databaseUrl, collections);
@@ -26,8 +21,8 @@ db.on("error", function(error) {
   console.log("Database Error:", error);
 });
 
-// Retrieve the most recent articles from the db and display
-app.get("/all", function(req, res) {
+// Retrieve the most recent articles from the db and display json
+router.get("/all", function(req, res) {
   // Find all results from the scrapedData collection in the db
   db.scrapedData.find({}, function(error, found) {
     // Throw any errors to the console
@@ -40,40 +35,7 @@ app.get("/all", function(req, res) {
     }
   });
 
-});
-
-
-// retrieve all of the saved articles
-
-app.get("/saved", function(req, res) {
-  // Find all results from the saved collection
-  db.saved.find({}, function(error, savedArticles) {
-    // Throw any errors to the console
-    if (error) {
-      console.log(error);
-    }
-    // If there are no errors, send the data to the browser as json
-    else {
-      res.render('saved.handlebars');
-    }
-  });
-
-});
-
-// retrieve homepage
-
-app.get("/", function(req, res) {
-
-  db.scrapedData.find({}, function(error, found) {
-
-    if (error) {
-      console.log(error);
-    }
-    else { //if no cookies are found, send user to homepage
-        res.render('index.handlebars');
-    };
-
-request("https://www.nytimes.com/", function(error, response, html) {
+  request("https://www.nytimes.com/", function(error, response, html) {
     // Load the html body from request into cheerio
     var $ = cheerio.load(html);
     // For each element with a "title" class
@@ -107,12 +69,40 @@ request("https://www.nytimes.com/", function(error, response, html) {
     });
   });
 
-  
+});
+
+
+// retrieve all of the saved articles
+
+router.get("/saved", function(req, res) {
+  // Find all results from the saved collection
+  db.saved.find({}, function(error, savedArticles) {
+    // Throw any errors to the console
+    if (error) {
+      console.log(error);
+    }
+    // If there are no errors, send the data to the browser as json
+    else {
+      res.render('saved.handlebars');
+    }
+  });
+
+});
+
+// retrieve homepage
+
+router.get("/", function(req, res) {
+
+  db.scrapedData.find({}, function(error, found) {
+
+    if (error) {
+      console.log(error);
+    }
+    else { //if no cookies are found, send user to homepage
+        res.render('index.handlebars');
+    };
   });
 });
 
 
-// Listen on port 3000
-app.listen(3000, function() {
-  console.log("App running on port 3000!");
-});
+module.exports = router;
