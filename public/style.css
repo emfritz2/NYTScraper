@@ -33,6 +33,10 @@
 
 }
 
+.btn:visited {
+	color: white;
+}
+
 #results {
 	/*background-color: #EEEEEE;*/
 	padding: 10px;

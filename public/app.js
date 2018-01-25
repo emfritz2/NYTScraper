@@ -54,7 +54,7 @@ $.getJSON("/all", function(data) {
 $("#scrape").on("click", function() {
 
   // Do an api call to the back end for json
-  $.getJSON("/all", function(data) {
+  $.getJSON("/articles", function(data) {
 
     // Call our function to generate a table body
     displayResults(data);
@@ -70,4 +70,11 @@ $("#save").on("click", function() {
     // Call our function to generate a table body
     displaySaved(data);
   });
+});
+
+// When user clicks the saved button, display saved articles
+$("#comment").on("click", function() {
+
+// modal popup to comment
+
 });

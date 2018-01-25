@@ -64,6 +64,13 @@ app.get("/saved", function(req, res) {
 
 app.get("/", function(req, res) {
 
+        res.render('home.handlebars');
+
+});
+
+
+app.get("/articles", function(req, res) {
+
   db.scrapedData.find({}, function(error, found) {
 
     if (error) {
@@ -107,10 +114,8 @@ request("https://www.nytimes.com/", function(error, response, html) {
     });
   });
 
-  
   });
 });
-
 
 // Listen on port 3000
 app.listen(3000, function() {
