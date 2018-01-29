@@ -14,7 +14,7 @@
                            "<a class= 'btn btn-md' role='button' target = '_blank' href= " + article.link + ">" + "Full Article" + "</a>"
                            // + "<button class= 'btn btn-md'" + "Save Article" "</button>"
                             + "<a class= 'btn btn-md save'>" + "Save" + "</a>"
-                            + "<a class= 'btn btn-md comment' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal'>" + "Comment" + "</a><hr class='my-4'>"
+                            + "<a class= 'btn btn-md comment' class='btn btn-primary' data-toggle='modal' data-target='.exampleModal'>" + "Comment" + "</a><hr class='my-4'>"
                            );
     });
   }
