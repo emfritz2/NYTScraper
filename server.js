@@ -18,6 +18,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static("public"));
 
 // Database configuration
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nyt-db";
 var databaseUrl = "nyt-db";
 var collections = ["scrapedData", "saved"];
 
