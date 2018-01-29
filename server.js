@@ -19,6 +19,10 @@ app.use(express.static("public"));
 
 // Database configuration
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nyt-db";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, {
+});
+
 var databaseUrl = "nyt-db";
 var collections = ["scrapedData", "saved"];
 
