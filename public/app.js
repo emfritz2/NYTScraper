@@ -10,30 +10,30 @@ function displayResults(articles) {
 
     // Append each of the articles properties to the page
     $("#results").append("<h3>" + article.title + "</h3>" +
-                         // "<p>" + article.summary + "</p>" +
+                         "<p>" + article.summary + "</p>" +
                          "<a class= 'btn btn-md' role='button' target = '_blank' href= " + article.link + ">" + "Full Article" + "</a>"
                          // + "<button class= 'btn btn-md'" + "Save Article" "</button>"
-                          + "<a class= 'btn btn-md' id='save'>" + "Save" + "</a>"
-                          + "<a class= 'btn btn-md' id='comment'>" + "Comment" + "</a><hr class='my-4'>"
+                          + "<a class= 'btn btn-md save'>" + "Save" + "</a>"
+                          + "<a class= 'btn btn-md comment' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal'>" + "Comment" + "</a><hr class='my-4'>"
                          );
   });
 }
 
 // display all of the saved articles
 
-function displaySaved(articles) {
+function displaySaved(saved) {
   // First, empty the table
   $("#saved-results").empty();
 
   // Then, for each entry ...
-  articles.forEach(function(article) {
+  saved.forEach(function(article) {
 
     // Append each of the articles properties to the page
-    $("#saved-results").append("<h3>" + saved.title + "</h3>" +
+    $("#saved-results").append("<h3>" + article.title + "</h3>" +
                          // "<p>" + article.summary + "</p>" +
-                         "<a class= 'btn btn-md' role='button' target = '_blank' href= " + saved.link + ">" + "Full Article" + "</a>"
+                         "<a class= 'btn btn-md' role='button' target = '_blank' href= " + article.link + ">" + "Full Article" + "</a>"
                          // + "<button class= 'btn btn-md'" + "Save Article" "</button>"
-                          + "<a class= 'btn btn-md' id='remove'" + saved.remove + ">" + "Remove" + "</a><hr class='my-4'>"
+                          + "<a class= 'btn btn-md' remove'" + article.remove + ">" + "Remove" + "</a><hr class='my-4'>"
                          );
   });
 }
@@ -62,19 +62,22 @@ $("#scrape").on("click", function() {
 });
 
 // When user clicks the saved button, display saved articles
-$("#save").on("click", function() {
+$("#saved").on("click", function() {
 
   // Do an api call to the back end for json
   $.getJSON("/saved", function(data) {
 
+    console.log("saved");
     // Call our function to generate a table body
     displaySaved(data);
+
   });
-});
-
-// When user clicks the saved button, display saved articles
-$("#comment").on("click", function() {
-
-// modal popup to comment
 
 });
+
+$(".save").on("click", function() {
+
+    alert("saved");
+
+  });
+
