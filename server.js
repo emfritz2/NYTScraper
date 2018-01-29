@@ -5,6 +5,7 @@ var mongojs = require("mongojs");
 var request = require("request");
 var cheerio = require("cheerio");
 var exphbs  = require('express-handlebars');
+var mongoose = require("mongoose");
 
 // Initialize Express
 var app = express();
@@ -26,10 +27,27 @@ db.on("error", function(error) {
   console.log("Database Error:", error);
 });
 
-// Retrieve the most recent articles from the db and display
+// Retrieve the most recent articles from the db
 app.get("/all", function(req, res) {
+
   // Find all results from the scrapedData collection in the db
   db.scrapedData.find({}, function(error, found) {
+    // Throw any errors to the console
+    if (error) {
+      console.log(error);
+    }
+    // If there are no errors, send the data to the browser as json
+    else {
+      res.json(found);
+    }
+  });
+    Scraped();
+});
+
+// Retrieve the saved articles from the db
+app.get("/save", function(req, res) {
+  // Find all results from the scrapedData collection in the db
+  db.saved.find({}, function(error, found) {
     // Throw any errors to the console
     if (error) {
       console.log(error);
@@ -46,19 +64,10 @@ app.get("/all", function(req, res) {
 // retrieve all of the saved articles
 
 app.get("/saved", function(req, res) {
-  // Find all results from the saved collection
-  db.saved.find({}, function(error, savedArticles) {
-    // Throw any errors to the console
-    if (error) {
-      console.log(error);
-    }
-    // If there are no errors, send the data to the browser as json
-    else {
-      res.render('saved.handlebars');
-    }
-  });
 
-});
+      res.render('saved.handlebars');
+
+    });
 
 // retrieve homepage
 
@@ -70,19 +79,9 @@ app.get("/", function(req, res) {
 
 
 app.get("/articles", function(req, res) {
+  
+  res.render('index.handlebars');
 
-  Scraped();
-
-  db.scrapedData.find({}, function(error, found) {
-
-    if (error) {
-      console.log(error);
-    }
-    else { //if no cookies are found, send user to homepage
-        res.render('index.handlebars');
-    };
-
-  });
 });
 
 // scraping function
@@ -119,8 +118,7 @@ function Scraped(){
             else {
               // Otherwise, log the inserted data
               console.log(inserted);
-              // redirect to the articles page
-              redirect("/");
+             
             }
           });
         }
