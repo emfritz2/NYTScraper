@@ -8,7 +8,6 @@
 }
 
 .btn-lg {
-	width: 15%;
 	background-color: #363636;
 	outline: 0px;
 	color: white;
@@ -17,10 +16,9 @@
 }
 
 .btn-md {
-	width: 10%;
 	background-color: #363636;
 	outline: 0px;
-	color: white;
+	color: white !important;
 	margin: 5px;
 
 }
@@ -33,9 +31,6 @@
 
 }
 
-.btn:visited {
-	color: white;
-}
 
 #results {
 	/*background-color: #EEEEEE;*/

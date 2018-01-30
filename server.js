@@ -1,7 +1,6 @@
 // Dependencies
 var express = require("express");
 var mongojs = require("mongojs");
-// Require request and cheerio. This makes the scraping possible
 var request = require("request");
 var cheerio = require("cheerio");
 var exphbs  = require('express-handlebars');
@@ -42,29 +41,26 @@ app.get("/all", function(req, res) {
 
 });
 
+// retrieve homepage
+app.get("/", function(req, res) {
+
+        res.render('home.handlebars');
+
+});
+
 
 // retrieve all of the saved articles
 
 app.get("/saved", function(req, res) {
   // Find all results from the saved collection
-  db.saved.find({}, function(error, savedArticles) {
-    // Throw any errors to the console
+  db.saved.find({}, function(error, found) {
     if (error) {
       console.log(error);
     }
-    // If there are no errors, send the data to the browser as json
     else {
       res.render('saved.handlebars');
     }
   });
-
-});
-
-// retrieve homepage
-
-app.get("/", function(req, res) {
-
-        res.render('home.handlebars');
 
 });
 
@@ -73,22 +69,15 @@ app.get("/articles", function(req, res) {
 
   db.scrapedData.find({}, function(error, found) {
 
-    if (error) {
-      console.log(error);
-    }
-    else { //if no cookies are found, send user to homepage
-        res.render('index.handlebars');
-    };
-
-request("https://www.nytimes.com/", function(error, response, html) {
+request("https://www.nytimes.com/section/world", function(error, response, html) {
     // Load the html body from request into cheerio
     var $ = cheerio.load(html);
     // For each element with a "title" class
-    $("h2.story-heading").each(function(i, element) {
+    $("div.story-body").each(function(i, element) {
       // Save the text and href of each link enclosed in the current element
-      var title = $(element).children("a").text();
-      var summary = $(element).children("a").text();
-      var link = $(element).children("a").attr("href");
+      var title = $(element).find("h2.headline").text().trim();
+      var summary = $(element).find("p.summary").text().trim();
+      var link = $(element).find("a").attr("href");
       var saved = false;
 
       // If this found element had both a title and a link
@@ -109,6 +98,7 @@ request("https://www.nytimes.com/", function(error, response, html) {
             // Otherwise, log the inserted data
             console.log(inserted);
           }
+          res.render('index.handlebars');
         });
       }
     });
